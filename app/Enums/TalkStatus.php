@@ -8,6 +8,8 @@ enum TalkStatus: string
     case APPROVED = 'Approved';
     case REJECTED = 'Rejected';
 
+    // This method returns the color associated with each status.
+
     public function getColor(): string
     {
         return match ($this) {
