@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use App\Enums\TalkLength;
 use App\Enums\TalkStatus;
 use Filament\Notifications\Notification;
+use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Filters\TernaryFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -97,8 +98,11 @@ class TalkResource extends Resource
                     })
             ])
             ->actions([
+                ViewAction::make(),
+
                 Tables\Actions\EditAction::make()
                     ->slideOver(),
+
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\Action::make('approve')
                         ->visible(function ($record) {
@@ -146,11 +150,12 @@ class TalkResource extends Resource
                         })
                 ]),
 
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\BulkAction::make('approve')
-                    ->icon('heroicon-o-check-circle')
+                        ->icon('heroicon-o-check-circle')
                         ->color('success')
                         ->action(function (Collection $records) {
                             $records->each->approve();
@@ -181,6 +186,7 @@ class TalkResource extends Resource
         return [
             'index' => Pages\ListTalks::route('/'),
             'create' => Pages\CreateTalk::route('/create'),
+        
             // 'edit' => Pages\EditTalk::route('/{record}/edit'),
         ];
     }
