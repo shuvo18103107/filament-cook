@@ -22,7 +22,10 @@ class TalkResource extends Resource
 {
     protected static ?string $model = Talk::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+//    protected static ?string $navigationIcon = 'heroicon-o-megaphone';
+    protected static ?string $recordTitleAttribute = 'title';
+
+    protected static ?string $navigationGroup = 'Laracon Dhaka';
 
     public static function form(Form $form): Form
     {
@@ -186,7 +189,7 @@ class TalkResource extends Resource
         return [
             'index' => Pages\ListTalks::route('/'),
             'create' => Pages\CreateTalk::route('/create'),
-        
+
             // 'edit' => Pages\EditTalk::route('/{record}/edit'),
         ];
     }

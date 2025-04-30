@@ -8,17 +8,30 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class ConferenceResource extends Resource
 {
     protected static ?string $model = Conference::class;
+    protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+//    protected static ?string $navigationIcon = 'heroicon-o-calendar';
+    protected static ?string $navigationGroup = 'Event';
 
     public static function form(Form $form): Form
     {
         return $form->schema(Conference::getForm());
     }
+
+    public static function getGlobalSearchResultDetails(Model $record): array
+    {
+        return [
+            "conference" => "Conference Name " . $record->name,
+
+        ];
+    }
+
+
 
     public static function table(Table $table): Table
     {
