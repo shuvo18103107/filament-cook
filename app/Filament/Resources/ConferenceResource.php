@@ -18,7 +18,6 @@ class ConferenceResource extends Resource
     public static function form(Form $form): Form
     {
         return $form->schema(Conference::getForm());
-
     }
 
     public static function table(Table $table): Table
@@ -28,6 +27,7 @@ class ConferenceResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('description')
+                    ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('start_date')
                     ->dateTime()
@@ -40,7 +40,6 @@ class ConferenceResource extends Resource
                 Tables\Columns\TextColumn::make('region')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('venue.name')
-                    ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
