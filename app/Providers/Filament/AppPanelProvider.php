@@ -20,6 +20,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use pxlrbt\FilamentEnvironmentIndicator\EnvironmentIndicatorPlugin;
 
 class AppPanelProvider extends PanelProvider
 {
@@ -71,7 +72,16 @@ class AppPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->plugins(
+                [
+                    EnvironmentIndicatorPlugin::make()->showGitBranch()
+
+                ]
+            )
+
+
+            ;
     }
 
     public function register(): void
